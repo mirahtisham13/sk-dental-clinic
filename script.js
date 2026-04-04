@@ -5,25 +5,26 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ========== DARK MODE TOGGLE ==========
+    // ========== THEME TOGGLE ==========
     const themeToggle = document.getElementById('themeToggle');
-    const html = document.documentElement;
-
-    // Check saved preference
-    const savedTheme = localStorage.getItem('sk-dental-theme');
-    if (savedTheme) {
-        html.setAttribute('data-theme', savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        html.setAttribute('data-theme', 'dark');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Check local storage for theme preference
+    const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
     }
-
+    
     themeToggle.addEventListener('click', () => {
-        const current = html.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('sk-dental-theme', next);
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        }
     });
-
 
     // ========== HEADER SCROLL EFFECT ==========
     const header = document.getElementById('header');
@@ -140,30 +141,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // ========== COUNTER ANIMATION (Trust Strip) ==========
-    let countersAnimated = false;
-    const trustSection = document.querySelector('.trust-strip');
-
-    const animateCounters = () => {
-        if (countersAnimated || !trustSection) return;
-        const rect = trustSection.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.9) {
-            countersAnimated = true;
-            // Simple fade-in for trust items
-            const items = trustSection.querySelectorAll('.trust__item');
-            items.forEach((item, i) => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                item.style.transition = `opacity 0.6s ease ${i * 0.15}s, transform 0.6s ease ${i * 0.15}s`;
-                requestAnimationFrame(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                });
-            });
-        }
-    };
-
-    window.addEventListener('scroll', animateCounters, { passive: true });
-    animateCounters();
 
 });
