@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block access to git repository
+Disallow: /.git/
+
+Sitemap: https://skdentalclinic.in/sitemap.xml
