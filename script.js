@@ -5,55 +5,15 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ========== SECTION REORDER ==========
-    // New order: Hero → Doctor → Reviews → Highlights → Services → Procedures → Gallery → Contact
-    const hero = document.getElementById('home');
-    const doctor = document.getElementById('doctor');
-    const reviews = document.getElementById('reviews');
-    const highlights = document.querySelector('.quick-highlights');
-
-    if (hero && doctor && reviews && highlights) {
-        // Insert doctor right after hero
-        hero.insertAdjacentElement('afterend', doctor);
-        // Insert reviews right after doctor
-        doctor.insertAdjacentElement('afterend', reviews);
-        // Insert highlights right after reviews
-        reviews.insertAdjacentElement('afterend', highlights);
-    }
-
-    // ========== THEME TOGGLE ==========
-    const themeToggle = document.getElementById('themeToggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    // Check local storage for theme preference
-    const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
-    if (currentTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
-
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        if (isDark) {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'light');
-        } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-        }
-    });
-
     // ========== HEADER SCROLL EFFECT ==========
     const header = document.getElementById('header');
-    let lastScroll = 0;
 
     window.addEventListener('scroll', () => {
-        const currentScroll = window.scrollY;
-        if (currentScroll > 50) {
+        if (window.scrollY > 40) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-        lastScroll = currentScroll;
     }, { passive: true });
 
 
@@ -82,13 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav__link');
 
     const highlightNav = () => {
-        const scrollPos = window.scrollY + 120;
-
+        const scrollPos = window.scrollY + 100;
         sections.forEach(section => {
             const top = section.offsetTop;
             const height = section.offsetHeight;
             const id = section.getAttribute('id');
-
             if (scrollPos >= top && scrollPos < top + height) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -106,32 +64,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ========== PROCEDURES ACCORDION ==========
     const procedureCards = document.querySelectorAll('[data-procedure]');
-
     procedureCards.forEach(card => {
-        const header = card.querySelector('.procedure__header');
-        header.addEventListener('click', () => {
+        const hdr = card.querySelector('.procedure__header');
+        if (!hdr) return;
+        hdr.addEventListener('click', () => {
             const isActive = card.classList.contains('active');
-
-            // Close all
             procedureCards.forEach(c => c.classList.remove('active'));
-
-            // Toggle current
-            if (!isActive) {
-                card.classList.add('active');
-            }
+            if (!isActive) card.classList.add('active');
         });
     });
 
 
-    // ========== SCROLL REVEAL (AOS) ==========
+    // ========== SCROLL REVEAL ==========
     const aosElements = document.querySelectorAll('[data-aos]');
 
     const revealOnScroll = () => {
         aosElements.forEach(el => {
             const rect = el.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-
-            if (rect.top < windowHeight * 0.88) {
+            if (rect.top < window.innerHeight * 0.9) {
                 el.classList.add('visible');
             }
         });
@@ -142,12 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
     revealOnScroll();
 
 
-    // ========== SMOOTH SCROLL FOR ANCHOR LINKS ==========
+    // ========== SMOOTH SCROLL ==========
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-
             const targetEl = document.querySelector(targetId);
             if (targetEl) {
                 e.preventDefault();
@@ -155,7 +104,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-
 
 });
