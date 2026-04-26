@@ -489,12 +489,14 @@ ol {
 .btn--secondary {
     background: var(--bg-card);
     color: var(--text-primary);
-    border-color: var(--border);
+    border-color: var(--gray-300);
+    font-weight: 600;
 }
 
 .btn--secondary:hover {
     border-color: var(--accent);
     color: var(--accent);
+    background: var(--accent-light);
     transform: translateY(-2px);
 }
 

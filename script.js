@@ -5,16 +5,32 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ========== SECTION REORDER ==========
+    // New order: Hero → Doctor → Reviews → Highlights → Services → Procedures → Gallery → Contact
+    const hero = document.getElementById('home');
+    const doctor = document.getElementById('doctor');
+    const reviews = document.getElementById('reviews');
+    const highlights = document.querySelector('.quick-highlights');
+
+    if (hero && doctor && reviews && highlights) {
+        // Insert doctor right after hero
+        hero.insertAdjacentElement('afterend', doctor);
+        // Insert reviews right after doctor
+        doctor.insertAdjacentElement('afterend', reviews);
+        // Insert highlights right after reviews
+        reviews.insertAdjacentElement('afterend', highlights);
+    }
+
     // ========== THEME TOGGLE ==========
     const themeToggle = document.getElementById('themeToggle');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
+
     // Check local storage for theme preference
     const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
     if (currentTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
     }
-    
+
     themeToggle.addEventListener('click', () => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         if (isDark) {
