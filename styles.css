@@ -376,7 +376,8 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
     .reviews__grid { grid-template-columns: 1fr; }
     .contact__grid { grid-template-columns: 1fr; }
     .footer__inner { grid-template-columns: 1fr; gap: 28px; }
-    .cta-card { padding: 40px 28px; }
+    .cta-card { padding: 40px 20px; }
+    .cta-card .btn--wa { width: 100%; justify-content: center; white-space: normal; text-align: center; padding: 14px 20px; line-height: 1.4; }
     .fab-wrap { bottom: 20px; right: 20px; }
 }
 
