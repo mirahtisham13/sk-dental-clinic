@@ -4,22 +4,23 @@
    ============================ */
 
 :root {
-    --primary: #0a1628;
-    --primary-light: #0f2038;
-    --primary-mid: #132a4a;
-    --accent: #3b82f6;
-    --accent-glow: rgba(59, 130, 246, 0.15);
-    --accent-hover: #2563eb;
-    --white: #ffffff;
-    --gray-100: rgba(255,255,255,0.08);
-    --gray-200: rgba(255,255,255,0.12);
-    --gray-text: rgba(255,255,255,0.6);
-    --gray-text-bright: rgba(255,255,255,0.85);
+    --primary: #0A1F1C;
+    --primary-light: #112D2A;
+    --primary-mid: #0D2623;
+    --accent: #2E8B57;
+    --accent-secondary: #6FA3A2;
+    --accent-glow: rgba(46, 139, 87, 0.15);
+    --accent-hover: #247045;
+    --white: #EAF4F1;
+    --gray-100: rgba(234, 244, 241, 0.08);
+    --gray-200: rgba(234, 244, 241, 0.12);
+    --gray-text: #9FB7B3;
+    --gray-text-bright: #C3D5D2;
     --whatsapp: #25d366;
     --whatsapp-dark: #1fba5a;
     --star: #fbbf24;
-    --border: rgba(255,255,255,0.08);
-    --border-hover: rgba(59,130,246,0.4);
+    --border: #1F4A45;
+    --border-hover: #2E8B57;
     --radius-sm: 12px;
     --radius-md: 12px;
     --radius-lg: 12px;
@@ -27,9 +28,9 @@
     --section-py: 100px;
     --transition: 250ms ease;
     --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --glow: 0 0 40px rgba(59,130,246,0.08);
-    --card-bg: rgba(255,255,255,0.04);
-    --card-hover: rgba(255,255,255,0.07);
+    --glow: 0 0 40px rgba(46, 139, 87, 0.08);
+    --card-bg: #112D2A;
+    --card-hover: #173834;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,7 +47,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
 .section__tag {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(59,130,246,0.2);
+    color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(46, 139, 87, 0.2);
     padding: 6px 16px; border-radius: var(--radius-full); margin-bottom: 14px;
 }
 .section__title {
@@ -71,8 +72,8 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
 .btn--call { background: var(--gray-100); color: var(--white); border-color: var(--border); backdrop-filter: blur(8px); }
 .btn--call:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
 .btn--accent { background: var(--accent); color: #fff; border-color: var(--accent); }
-.btn--accent:hover { background: var(--accent-hover); border-color: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.3); }
-.btn--outline { background: transparent; color: var(--accent); border-color: rgba(59,130,246,0.4); }
+.btn--accent:hover { background: var(--accent-hover); border-color: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(46, 139, 87, 0.3); }
+.btn--outline { background: transparent; color: var(--accent); border-color: rgba(46, 139, 87, 0.4); }
 .btn--outline:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 
 /* ============================
@@ -80,7 +81,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
    ============================ */
 .header {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(10,22,40,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 31, 28, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border); transition: box-shadow var(--transition);
 }
 .header.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
@@ -111,17 +112,17 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
 }
 .hero::before {
     content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); pointer-events: none;
+    background: radial-gradient(circle, rgba(46, 139, 87, 0.08) 0%, transparent 70%); pointer-events: none;
 }
 .hero__inner { max-width: 640px; position: relative; z-index: 1; }
 .hero__tag {
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 0.8rem; font-weight: 600; color: var(--accent);
-    background: var(--accent-glow); border: 1px solid rgba(59,130,246,0.2);
+    background: var(--accent-glow); border: 1px solid rgba(46, 139, 87, 0.2);
     padding: 7px 18px; border-radius: var(--radius-full); margin-bottom: 24px;
 }
 .hero__title { font-size: clamp(2.2rem, 5.5vw, 3.4rem); font-weight: 800; line-height: 1.12; color: var(--white); margin-bottom: 20px; }
-.hero__title .accent { background: linear-gradient(135deg, var(--accent), #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero__title .accent { background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .hero__subtitle { font-size: 1.1rem; color: var(--gray-text); line-height: 1.8; margin-bottom: 36px; max-width: 540px; }
 .hero__buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
 .hero__pills { display: flex; flex-wrap: wrap; gap: 14px; }
@@ -155,7 +156,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
 }
 .doctor__img-wrap::after {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(10,22,40,0.3), transparent); pointer-events: none;
+    background: linear-gradient(to top, rgba(10, 31, 28, 0.3), transparent); pointer-events: none;
 }
 .doctor__img { width: 100%; height: 100%; object-fit: cover; }
 .doctor__name { font-size: 1.8rem; font-weight: 800; margin-bottom: 6px; color: var(--white); }
@@ -179,7 +180,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
 }
 .service__card::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--accent), #60a5fa); opacity: 0; transition: opacity var(--transition);
+    background: linear-gradient(90deg, var(--accent), var(--accent-secondary)); opacity: 0; transition: opacity var(--transition);
 }
 .service__card:hover { background: var(--card-hover); border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--glow); }
 .service__card:hover::before { opacity: 1; }
@@ -236,7 +237,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
 .review__text { font-size: 0.92rem; color: var(--gray-text); line-height: 1.75; margin-bottom: 20px; font-style: italic; }
 .review__author { display: flex; align-items: center; gap: 12px; }
 .review__avatar {
-    width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #60a5fa); color: #fff;
+    width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); color: #fff;
     border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;
     font-weight: 700; font-size: 0.88rem; flex-shrink: 0;
 }
@@ -255,7 +256,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
 }
 .cta-section::before {
     content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-    width: 600px; height: 600px; background: radial-gradient(circle, rgba(59,130,246,0.06), transparent 70%);
+    width: 600px; height: 600px; background: radial-gradient(circle, rgba(46, 139, 87, 0.06), transparent 70%);
     pointer-events: none;
 }
 .cta-card {
@@ -278,7 +279,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
 .contact__label { font-size: 0.78rem; font-weight: 700; color: var(--white); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.06em; }
 .contact__value { font-size: 0.9rem; color: var(--gray-text); }
 .contact__value a { color: var(--accent); transition: color var(--transition); }
-.contact__value a:hover { color: #60a5fa; }
+.contact__value a:hover { color: var(--accent-secondary); }
 .contact__buttons { display: flex; gap: 12px; margin-top: 8px; }
 .contact__map { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); min-height: 320px; }
 .contact__map iframe { width: 100%; height: 100%; min-height: 320px; border-radius: var(--radius-lg); }
@@ -345,7 +346,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
    ============================ */
 .mobile-menu {
     position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 9999;
-    background: rgba(10, 20, 40, 0.98); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    background: rgba(10, 31, 28, 0.98); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     transform: translateX(100%); transition: transform 0.3s ease;
 }
