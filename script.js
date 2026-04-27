@@ -19,27 +19,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ========== MOBILE MENU ==========
     const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
 
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('open');
-        document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
-    });
+    const openMenu = () => {
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeMenu = () => {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    };
+
+    if (hamburger) hamburger.addEventListener('click', openMenu);
+    if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMenu);
 
     // Close on nav link click
-    navMenu.querySelectorAll('.nav__link').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('open');
-            document.body.style.overflow = '';
+    if (mobileMenu) {
+        mobileMenu.querySelectorAll('.mobile-menu__link').forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
-    });
+    }
 
 
     // ========== ACTIVE NAV HIGHLIGHTING ==========
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav__link');
+    const navLinks = document.querySelectorAll('.nav__link, .mobile-menu__link');
 
     const highlightNav = () => {
         const scrollPos = window.scrollY + 100;
