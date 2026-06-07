@@ -307,8 +307,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
 
 /* Stats ribbon */
 .stats {
-    padding: 0; position: relative; z-index: 2;
-    margin-top: -40px; margin-bottom: 20px;
+    padding: 40px 0; position: relative; z-index: 2;
 }
 .stats__grid {
     display: grid; grid-template-columns: repeat(4, 1fr);
