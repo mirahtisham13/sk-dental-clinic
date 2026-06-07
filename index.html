@@ -204,8 +204,8 @@
 <!-- HERO -->
 <section class="hero" id="home">
     <div class="container">
-        <div class="hero__grid">
-            <div class="hero__content">
+        <div class="hero__grid hero__grid--centered">
+            <div class="hero__content hero__content--centered">
                 <div class="hero__tag">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                     Kupwara's trusted dental studio
@@ -228,18 +228,6 @@
                     <span class="hero__pill"><strong>9 AM – 7 PM</strong> Every Day</span>
                 </div>
             </div>
-            <div class="hero__visual">
-                <div class="hero__img-wrap">
-                    <picture>
-                        <source srcset="assets/images/dr-suhail-ahmad-tantry.webp" type="image/webp">
-                        <img src="assets/images/dr-suhail-ahmad-tantry.png" alt="Dr. Suhail Ahmad Tantry – Dentist at SK Dental &amp; Cosmetic Clinic, Kupwara" class="hero__img" width="600" height="750" fetchpriority="high">
-                    </picture>
-                    <div class="hero__badge">
-                        <strong>Dr. Suhail Ahmad Tantry</strong>
-                        <span>BDS, PGDCC · 8+ Years</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
@@ -259,16 +247,44 @@
 <!-- DOCTOR -->
 <section class="section doctor" id="doctor">
     <div class="container">
+        <div class="section__header section__header--center" data-aos>
+            <span class="section__eyebrow">Meet Your Doctor</span>
+            <h2 class="section__title">The expert behind <span class="accent">every smile</span></h2>
+        </div>
         <div class="doctor__grid">
-            <div class="doctor__img-wrap" data-aos>
-                <picture>
-                    <source srcset="assets/images/dr-suhail-ahmad-tantry.webp" type="image/webp">
-                    <img src="assets/images/dr-suhail-ahmad-tantry.png" alt="Dr. Suhail Ahmad Tantry – BDS, PGDCC, Dentist in Kupwara" class="doctor__img" loading="lazy" width="300" height="400">
-                </picture>
+            <div class="doctor__photo-col" data-aos>
+                <div class="doctor__img-wrap">
+                    <picture>
+                        <source srcset="assets/images/dr-suhail-ahmad-tantry.webp" type="image/webp">
+                        <img src="assets/images/dr-suhail-ahmad-tantry.png" alt="Dr. Suhail Ahmad Tantry – BDS, PGDCC, Dentist in Kupwara" class="doctor__img" loading="lazy" width="480" height="600">
+                    </picture>
+                    <div class="doctor__photo-badge">
+                        <div class="doctor__photo-badge-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <div>
+                            <strong>Dr. Suhail Ahmad Tantry</strong>
+                            <span>BDS, PGDCC · Verified Dentist</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="doctor__mini-stats">
+                    <div class="doctor__mini-stat">
+                        <span class="doctor__mini-num">5000+</span>
+                        <span class="doctor__mini-label">Patients</span>
+                    </div>
+                    <div class="doctor__mini-stat">
+                        <span class="doctor__mini-num">8+</span>
+                        <span class="doctor__mini-label">Years Exp.</span>
+                    </div>
+                    <div class="doctor__mini-stat">
+                        <span class="doctor__mini-num">4.7★</span>
+                        <span class="doctor__mini-label">Google Rating</span>
+                    </div>
+                </div>
             </div>
             <div class="doctor__info" data-aos>
-                <span class="section__eyebrow">Meet Your Doctor</span>
-                <h2 class="doctor__name">Dr. Suhail Ahmad Tantry</h2>
+                <h3 class="doctor__name">Dr. Suhail Ahmad Tantry</h3>
                 <p class="doctor__qual">BDS, PGDCC &nbsp;·&nbsp; 8+ Years Experience</p>
                 <p class="doctor__bio"><strong>Dr. Suhail</strong> has restored smiles for <strong>5000+ patients</strong> across India — from children's first check-ups to full-mouth implants and jaw surgery.</p>
                 <p class="doctor__bio">He explains every option in plain language, plans treatment around your comfort and budget, and never recommends work you don't need.</p>
@@ -278,6 +294,16 @@
                     <span class="doctor__chip">Oral Surgery</span>
                     <span class="doctor__chip">Cosmetic Dentistry</span>
                     <span class="doctor__chip">Periodontics</span>
+                </div>
+                <div class="doctor__cta">
+                    <a href="https://wa.me/917780933136?text=Hello%20I%20want%20to%20book%20an%20appointment%20with%20Dr.%20Suhail" target="_blank" rel="noopener noreferrer" class="btn btn--wa">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Book Appointment
+                    </a>
+                    <a href="tel:+917780933136" class="btn btn--call">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Call Now
+                    </a>
                 </div>
             </div>
         </div>
