@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (data && data.length > 0) {
             casesGrid.innerHTML = data.map(c => `
-                <div class="case-card" data-aos>
+                <div class="case-card" style="animation: fadeIn 0.5s ease-out forwards;">
                     <img src="${c.featured_image || 'assets/images/placeholder.jpg'}" alt="${c.title}" style="width:100%; height:200px; object-fit:cover; border-radius:var(--radius-md);">
                     <h3 style="margin-top:15px; font-size:1.1rem; color:var(--text);">${c.title}</h3>
                     <p style="color:var(--text-muted); font-size:0.9rem;">${c.category}</p>
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (data && data.length > 0) {
             reviewsGrid.innerHTML = data.map(r => `
-                <div class="review__card" data-aos>
+                <div class="review__card" style="animation: fadeIn 0.5s ease-out forwards;">
                     <div class="review__stars" aria-label="${r.rating} out of 5 stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
                     <p class="review__text">"${r.text}"</p>
                     <div class="review__author">
@@ -130,6 +130,37 @@ document.addEventListener('DOMContentLoaded', async () => {
                 btn.disabled = false;
             }
         });
+    }
+
+    // 5. Interactive Star Rating Logic
+    const stars = document.querySelectorAll('.star-rating .star');
+    const ratingInput = document.getElementById('rev_rating');
+    
+    if (stars.length > 0) {
+        stars.forEach(star => {
+            star.addEventListener('click', (e) => {
+                const val = parseInt(e.target.getAttribute('data-val'));
+                ratingInput.value = val;
+                updateStars(val);
+            });
+            star.addEventListener('mouseover', (e) => {
+                const val = parseInt(e.target.getAttribute('data-val'));
+                updateStars(val);
+            });
+            star.addEventListener('mouseout', () => {
+                updateStars(parseInt(ratingInput.value));
+            });
+        });
+        
+        function updateStars(val) {
+            stars.forEach(s => {
+                if (parseInt(s.getAttribute('data-val')) <= val) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        }
     }
 
     // Execute loaders

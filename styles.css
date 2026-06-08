@@ -743,3 +743,13 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
     letter-spacing: 2px;
     margin-bottom: 12px;
 }
+
+/* Interactive Star Rating Form */
+.star-rating .star {
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+.star-rating .star.active {
+    color: #f59e0b;
+}
+

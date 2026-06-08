@@ -465,8 +465,15 @@
                         <input type="text" id="rev_name" required style="width:100%; padding:10px; background:transparent; border:1px solid var(--border); border-radius:8px; color:var(--text);">
                     </div>
                     <div>
-                        <label style="display:block; margin-bottom:5px; font-size:0.9rem; color:var(--text-muted);">Rating (1-5)</label>
-                        <input type="number" id="rev_rating" min="1" max="5" value="5" required style="width:100%; padding:10px; background:transparent; border:1px solid var(--border); border-radius:8px; color:var(--text);">
+                        <label style="display:block; margin-bottom:5px; font-size:0.9rem; color:var(--text-muted);">Rating</label>
+                        <div class="star-rating" style="display:flex; gap:5px; font-size:1.8rem; cursor:pointer;">
+                            <span class="star active" data-val="1">&#9733;</span>
+                            <span class="star active" data-val="2">&#9733;</span>
+                            <span class="star active" data-val="3">&#9733;</span>
+                            <span class="star active" data-val="4">&#9733;</span>
+                            <span class="star active" data-val="5">&#9733;</span>
+                        </div>
+                        <input type="hidden" id="rev_rating" value="5">
                     </div>
                 </div>
                 <div style="margin-bottom: 15px;">
