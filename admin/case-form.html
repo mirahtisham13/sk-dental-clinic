@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Form | Admin | SK Dental</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Quill.js for Rich Text -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+</head>
+<body>
+    
+    <aside class="sidebar">
+        <a href="../index.html" class="logo" target="_blank">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none"><path d="M16 4C13.5 4 11.5 6 10 9C8.5 12 7.5 15.5 8.5 19.5C9.5 23 11 26 13 28C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28C21 26 22.5 23 23.5 19.5C24.5 15.5 23.5 12 22 9C20.5 6 18.5 4 16 4Z" stroke="var(--primary)" stroke-width="2"/></svg>
+            SK Dental
+        </a>
+        <nav>
+            <a href="cases.html">All Cases</a>
+            <a href="case-form.html" class="active" id="navLabel">Add Case</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="hub.html">Site Editor</a>
+        </nav>
+        <button id="logoutBtn" class="logout-btn" style="margin-top: auto;">Log Out</button>
+    </aside>
+
+    <main class="main-content">
+        <div class="header-flex">
+            <h1 id="pageTitle">Add New Case</h1>
+            <a href="cases.html" style="color: var(--text-muted); text-decoration: none;">← Back</a>
+        </div>
+
+        <form id="caseForm" style="max-width: 800px;">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="title" required placeholder="e.g. Full Mouth Rehabilitation">
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" id="category" required placeholder="e.g. Implants">
+                </div>
+                <div class="form-group">
+                    <label>Treatment Type</label>
+                    <input type="text" id="treatment_type" placeholder="e.g. All-on-4">
+                </div>
+                <div class="form-group">
+                    <label>Patient Age</label>
+                    <input type="number" id="patient_age" placeholder="45">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Featured Image</label>
+                <input type="file" id="featured_image_file" accept="image/*">
+                <small id="currentFeatured" style="display:block; margin-top:5px; color:var(--primary);"></small>
+            </div>
+
+            <div class="form-group">
+                <label>Content</label>
+                <div id="editor" class="editor-container"></div>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">Save Case</button>
+            <div id="statusMsg" style="margin-top: 15px;"></div>
+        </form>
+    </main>
+
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const quill = new Quill('#editor', { theme: 'snow' });
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const caseId = urlParams.get('id');
+            
+            let currentFeaturedUrl = '';
+
+            if (caseId) {
+                document.getElementById('pageTitle').innerText = 'Edit Case';
+                document.getElementById('navLabel').innerText = 'Edit Case';
+                document.getElementById('submitBtn').innerText = 'Update Case';
+
+                // Load existing data
+                const { data, error } = await supabaseClient
+                    .from('cases')
+                    .select('*')
+                    .eq('id', caseId)
+                    .single();
+
+                if (data) {
+                    document.getElementById('title').value = data.title;
+                    document.getElementById('category').value = data.category;
+                    document.getElementById('treatment_type').value = data.treatment_type || '';
+                    document.getElementById('patient_age').value = data.patient_age || '';
+                    if(data.content) quill.root.innerHTML = data.content;
+                    
+                    if(data.featured_image) {
+                        currentFeaturedUrl = data.featured_image;
+                        document.getElementById('currentFeatured').innerText = "Current: " + data.featured_image.split('/').pop();
+                    }
+                }
+            }
+
+            // Handle file upload
+            async function uploadImage(file) {
+                const fileExt = file.name.split('.').pop();
+                const fileName = `${Math.random()}.${fileExt}`;
+                const filePath = `featured/${fileName}`;
+
+                const { error: uploadError } = await supabaseClient.storage
+                    .from('cases-images')
+                    .upload(filePath, file);
+
+                if (uploadError) throw uploadError;
+
+                const { data } = supabaseClient.storage
+                    .from('cases-images')
+                    .getPublicUrl(filePath);
+
+                return data.publicUrl;
+            }
+
+            document.getElementById('caseForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('submitBtn');
+                const status = document.getElementById('statusMsg');
+                btn.disabled = true;
+                btn.innerText = 'Saving...';
+                status.innerText = '';
+
+                try {
+                    // Handle image upload if selected
+                    const fileInput = document.getElementById('featured_image_file');
+                    let featuredUrl = currentFeaturedUrl;
+                    
+                    if (fileInput.files.length > 0) {
+                        featuredUrl = await uploadImage(fileInput.files[0]);
+                    }
+
+                    const caseData = {
+                        title: document.getElementById('title').value,
+                        category: document.getElementById('category').value,
+                        treatment_type: document.getElementById('treatment_type').value,
+                        patient_age: document.getElementById('patient_age').value || null,
+                        content: quill.root.innerHTML,
+                        featured_image: featuredUrl
+                    };
+
+                    let error;
+                    if (caseId) {
+                        const res = await supabaseClient.from('cases').update(caseData).eq('id', caseId);
+                        error = res.error;
+                    } else {
+                        const res = await supabaseClient.from('cases').insert([caseData]);
+                        error = res.error;
+                    }
+
+                    if (error) throw error;
+
+                    status.style.color = 'var(--success)';
+                    status.innerText = 'Case saved successfully!';
+                    setTimeout(() => window.location.href = 'cases.html', 1000);
+
+                } catch (err) {
+                    status.style.color = 'var(--danger)';
+                    status.innerText = 'Error: ' + err.message;
+                    btn.disabled = false;
+                    btn.innerText = 'Save Case';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

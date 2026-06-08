@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Editor | Admin | SK Dental</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    
+    <aside class="sidebar">
+        <a href="../index.html" class="logo" target="_blank">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none"><path d="M16 4C13.5 4 11.5 6 10 9C8.5 12 7.5 15.5 8.5 19.5C9.5 23 11 26 13 28C14 29 15 29.5 16 29.5C17 29.5 18 29 19 28C21 26 22.5 23 23.5 19.5C24.5 15.5 23.5 12 22 9C20.5 6 18.5 4 16 4Z" stroke="var(--primary)" stroke-width="2"/></svg>
+            SK Dental
+        </a>
+        <nav>
+            <a href="cases.html">All Cases</a>
+            <a href="case-form.html">Add Case</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="hub.html" class="active">Site Editor</a>
+        </nav>
+        <button id="logoutBtn" class="logout-btn" style="margin-top: auto;">Log Out</button>
+    </aside>
+
+    <main class="main-content">
+        <h1>Site Editor</h1>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">Manage global website content and static assets.</p>
+
+        <!-- Static Image Replacement -->
+        <div class="table-container" style="padding: 20px; margin-bottom: 40px;">
+            <h3>Replace Website Images</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">Upload images here to overwrite the existing static images on the public website. (Make sure your public website is updated to fetch these from Supabase).</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 8px;">
+                    <label>Doctor Photo (Hero/Bio)</label>
+                    <input type="file" id="doctor_photo_file" accept="image/*">
+                    <button class="btn" style="margin-top: 10px;" onclick="uploadAsset('doctor_photo_file', 'dr-suhail-ahmad-tantry.png')">Upload Photo</button>
+                    <small id="doctor_photo_file_status" style="display:block; margin-top:5px;"></small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Site Settings Form -->
+        <div class="table-container" style="padding: 20px;">
+            <h3>Global Text Settings</h3>
+            <form id="settingsForm" style="margin-top: 20px;">
+                
+                <div class="form-group">
+                    <label>About/Bio Text</label>
+                    <textarea id="about_text" rows="4" required></textarea>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Physical Address</label>
+                        <input type="text" id="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Clinic Timings</label>
+                        <input type="text" id="timings" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Consultation Fee</label>
+                        <input type="text" id="fee_amount" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn" id="saveSettingsBtn">Save Settings</button>
+                <div id="settingsStatusMsg" style="margin-top: 15px;"></div>
+            </form>
+        </div>
+
+    </main>
+
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            
+            // --- Settings Form Logic ---
+            const form = document.getElementById('settingsForm');
+            const btn = document.getElementById('saveSettingsBtn');
+            const status = document.getElementById('settingsStatusMsg');
+
+            // Load existing settings
+            const { data, error } = await supabaseClient
+                .from('site_settings')
+                .select('*')
+                .eq('id', 1)
+                .single();
+
+            if (data) {
+                document.getElementById('about_text').value = data.about_text || '';
+                document.getElementById('phone').value = data.phone || '';
+                document.getElementById('email').value = data.email || '';
+                document.getElementById('address').value = data.address || '';
+                document.getElementById('timings').value = data.timings || '';
+                document.getElementById('fee_amount').value = data.fee_amount || '';
+            }
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                btn.disabled = true;
+                btn.innerText = 'Saving...';
+                status.innerText = '';
+
+                const settingsData = {
+                    about_text: document.getElementById('about_text').value,
+                    phone: document.getElementById('phone').value,
+                    email: document.getElementById('email').value,
+                    address: document.getElementById('address').value,
+                    timings: document.getElementById('timings').value,
+                    fee_amount: document.getElementById('fee_amount').value
+                };
+
+                const { error: updateError } = await supabaseClient
+                    .from('site_settings')
+                    .update(settingsData)
+                    .eq('id', 1);
+
+                btn.disabled = false;
+                btn.innerText = 'Save Settings';
+
+                if (updateError) {
+                    status.style.color = 'var(--danger)';
+                    status.innerText = 'Error: ' + updateError.message;
+                } else {
+                    status.style.color = 'var(--success)';
+                    status.innerText = 'Settings saved successfully!';
+                    setTimeout(() => status.innerText = '', 3000);
+                }
+            });
+
+            // --- Asset Upload Logic ---
+            window.uploadAsset = async (inputId, targetFileName) => {
+                const fileInput = document.getElementById(inputId);
+                const statusEl = document.getElementById(inputId + '_status');
+                
+                if (fileInput.files.length === 0) {
+                    statusEl.style.color = 'var(--danger)';
+                    statusEl.innerText = 'Please select a file first.';
+                    return;
+                }
+
+                const file = fileInput.files[0];
+                const filePath = `site-assets/${targetFileName}`;
+
+                statusEl.style.color = 'var(--text-muted)';
+                statusEl.innerText = 'Uploading...';
+
+                // We use upsert: true to overwrite the existing file
+                const { error: uploadError } = await supabaseClient.storage
+                    .from('cases-images')
+                    .upload(filePath, file, {
+                        cacheControl: '3600',
+                        upsert: true
+                    });
+
+                if (uploadError) {
+                    statusEl.style.color = 'var(--danger)';
+                    statusEl.innerText = 'Upload failed: ' + uploadError.message;
+                } else {
+                    statusEl.style.color = 'var(--success)';
+                    statusEl.innerText = 'Successfully updated ' + targetFileName;
+                }
+            };
+        });
+    </script>
+</body>
+</html>
