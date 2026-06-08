@@ -62,6 +62,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <p style="color:var(--text-muted); font-size:0.9rem;">${c.category}</p>
                 </div>
             `).join('');
+        } else {
+            casesGrid.innerHTML = '<p style="text-align:center; color:var(--text-muted); grid-column: 1 / -1;">New cases will be showcased here soon.</p>';
         }
     };
 
@@ -91,6 +93,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                 </div>
             `).join('');
+        } else {
+            reviewsGrid.innerHTML = '<p style="text-align:center; color:var(--text-muted); grid-column: 1 / -1;">No reviews published yet.</p>';
         }
     };
 

@@ -735,3 +735,11 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
     border-color: var(--primary);
     box-shadow: var(--shadow-glow);
 }
+
+/* Review Stars Styling */
+.review__stars {
+    color: #f59e0b; /* Bright gold/yellow color for stars */
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
