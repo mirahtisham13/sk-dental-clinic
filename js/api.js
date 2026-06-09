@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             .limit(6);
 
         if (data && data.length > 0) {
-            reviewsGrid.innerHTML = data.map(r => `
+            const newReviewsHTML = data.map(r => `
                 <div class="review__card" style="animation: fadeIn 0.5s ease-out forwards;">
                     <div class="review__stars" aria-label="${r.rating} out of 5 stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
                     <p class="review__text">"${r.text}"</p>
@@ -93,8 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                 </div>
             `).join('');
-        } else {
-            reviewsGrid.innerHTML = '<p style="text-align:center; color:var(--text-muted); grid-column: 1 / -1;">No reviews published yet.</p>';
+            reviewsGrid.insertAdjacentHTML('beforeend', newReviewsHTML);
         }
     };
 
