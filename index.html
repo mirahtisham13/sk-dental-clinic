@@ -249,10 +249,13 @@
         <div class="doctor__grid">
             <div class="doctor__photo-col" data-aos>
                 <div class="doctor__img-wrap">
-                    <picture>
-                        <source srcset="assets/images/dr-suhail-ahmad-tantry.webp" type="image/webp">
-                        <img src="assets/images/dr-suhail-ahmad-tantry.png" alt="Dr. Suhail Ahmad Tantry – BDS, PGDCC, Dentist in Kupwara" class="doctor__img" loading="lazy" width="480" height="600">
-                    </picture>
+                    <img src="https://uicuadqmvmwhtepkzvfi.supabase.co/storage/v1/object/public/cases-images/site-assets/dr-suhail-ahmad-tantry.png" 
+                         onerror="this.onerror=null; this.src='assets/images/dr-suhail-ahmad-tantry.png';" 
+                         alt="Dr. Suhail Ahmad Tantry – BDS, PGDCC, Dentist in Kupwara" 
+                         class="doctor__img" 
+                         loading="lazy" 
+                         width="480" 
+                         height="600">
                     <div class="doctor__photo-badge">
                         <div class="doctor__photo-badge-icon">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -411,29 +414,25 @@
             <h2 class="section__title">A calm space <span class="accent">built for care</span></h2>
         </div>
         <div class="gallery__grid">
-            <button type="button" class="gallery__item" data-aos data-full="assets/images/dental-clinic-treatment-room.webp" aria-label="View treatment room">
-                <picture>
-                    <source srcset="assets/images/dental-clinic-treatment-room.webp" type="image/webp">
-                    <img src="assets/images/dental-clinic-treatment-room.png" alt="SK Dental Kupwara – modern treatment room" loading="lazy" width="800" height="500">
-                </picture>
-            </button>
             <button type="button" class="gallery__item" data-aos data-full="assets/images/dental-clinic-reception.webp" aria-label="View reception area">
-                <picture>
-                    <source srcset="assets/images/dental-clinic-reception.webp" type="image/webp">
-                    <img src="assets/images/dental-clinic-reception.png" alt="SK Dental Kupwara – reception area" loading="lazy" width="800" height="500">
-                </picture>
+                <img src="https://uicuadqmvmwhtepkzvfi.supabase.co/storage/v1/object/public/cases-images/site-assets/gallery-1.jpg" 
+                     onerror="this.onerror=null; this.src='assets/images/dental-clinic-reception.webp';" 
+                     alt="SK Dental Kupwara – reception area" loading="lazy" width="800" height="500">
             </button>
             <button type="button" class="gallery__item" data-aos data-full="assets/images/dental-clinic-equipment.webp" aria-label="View dental equipment">
-                <picture>
-                    <source srcset="assets/images/dental-clinic-equipment.webp" type="image/webp">
-                    <img src="assets/images/dental-clinic-equipment.png" alt="SK Dental Kupwara – dental equipment" loading="lazy" width="800" height="500">
-                </picture>
+                <img src="https://uicuadqmvmwhtepkzvfi.supabase.co/storage/v1/object/public/cases-images/site-assets/gallery-2.jpg" 
+                     onerror="this.onerror=null; this.src='assets/images/dental-clinic-equipment.webp';" 
+                     alt="SK Dental Kupwara – dental equipment" loading="lazy" width="800" height="500">
             </button>
             <button type="button" class="gallery__item" data-aos data-full="assets/images/dental-clinic-exterior.webp" aria-label="View clinic exterior">
-                <picture>
-                    <source srcset="assets/images/dental-clinic-exterior.webp" type="image/webp">
-                    <img src="assets/images/dental-clinic-exterior.png" alt="SK Dental Cosmetic Clinic exterior Kupwara" loading="lazy" width="800" height="500">
-                </picture>
+                <img src="https://uicuadqmvmwhtepkzvfi.supabase.co/storage/v1/object/public/cases-images/site-assets/gallery-3.jpg" 
+                     onerror="this.onerror=null; this.src='assets/images/dental-clinic-exterior.webp';" 
+                     alt="SK Dental Cosmetic Clinic exterior Kupwara" loading="lazy" width="800" height="500">
+            </button>
+            <button type="button" class="gallery__item" data-aos data-full="assets/images/dental-clinic-treatment-room.webp" aria-label="View treatment room">
+                <img src="https://uicuadqmvmwhtepkzvfi.supabase.co/storage/v1/object/public/cases-images/site-assets/gallery-4.jpg" 
+                     onerror="this.onerror=null; this.src='assets/images/dental-clinic-treatment-room.webp';" 
+                     alt="SK Dental Cosmetic Clinic treatment room" loading="lazy" width="800" height="500">
             </button>
         </div>
     </div>
@@ -452,8 +451,32 @@
             <a href="https://share.google/Do6VGwMxfh46cqUZg" target="_blank" rel="noopener noreferrer" class="reviews__banner-link">Read all reviews on Google →</a>
         </div>
         <div class="reviews__grid" id="dyn_reviews_grid">
-            <!-- Reviews injected dynamically via Supabase -->
-            <p style="text-align:center; color:var(--text-muted); grid-column: 1 / -1;">Loading reviews...</p>
+            <!-- Static Google Reviews -->
+            <div class="review__card">
+                <div class="review__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="review__text">"Very professional and hygienic clinic. Dr. Suhail explained every step before the procedure. Got my implant done here — smooth and painless experience. Highly recommended."</p>
+                <div class="review__author">
+                    <div class="review__avatar" aria-hidden="true">A</div>
+                    <div class="review__meta"><span class="review__name">Aafaq R.</span><span class="review__source">Google Review</span></div>
+                </div>
+            </div>
+            <div class="review__card">
+                <div class="review__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="review__text">"Best dental clinic in Kupwara. The clinic is well-equipped and the doctor is very experienced. I had my wisdom tooth removed and recovery was quick. Clean and modern setup."</p>
+                <div class="review__author">
+                    <div class="review__avatar" aria-hidden="true">M</div>
+                    <div class="review__meta"><span class="review__name">Mudasir S.</span><span class="review__source">Google Review</span></div>
+                </div>
+            </div>
+            <div class="review__card">
+                <div class="review__stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="review__text">"Took my child for braces consultation. Dr. Suhail was patient and thorough. The clinic atmosphere is very professional. Started the treatment and seeing good progress."</p>
+                <div class="review__author">
+                    <div class="review__avatar" aria-hidden="true">S</div>
+                    <div class="review__meta"><span class="review__name">Shabir K.</span><span class="review__source">Google Review</span></div>
+                </div>
+            </div>
+            <!-- Dynamic Reviews injected via Supabase will appear here -->
         </div>
 
         <div class="submit-review-box" style="margin-top: 50px; background: var(--bg-card); padding: 40px; border-radius: var(--radius-lg); border: 1px solid var(--border); max-width: 600px; margin-left: auto; margin-right: auto;">
