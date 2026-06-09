@@ -163,12 +163,9 @@
                 btn.innerText = 'Save Settings';
 
                 if (updateError) {
-                    status.style.color = 'var(--danger)';
-                    status.innerText = 'Error: ' + updateError.message;
+                    showToast('Error: ' + updateError.message, 'error');
                 } else {
-                    status.style.color = 'var(--success)';
-                    status.innerText = 'Settings saved successfully!';
-                    setTimeout(() => status.innerText = '', 3000);
+                    showToast('Settings saved successfully!', 'success');
                 }
             });
 
@@ -178,8 +175,7 @@
                 const statusEl = document.getElementById(inputId + '_status');
                 
                 if (fileInput.files.length === 0) {
-                    statusEl.style.color = 'var(--danger)';
-                    statusEl.innerText = 'Please select a file first.';
+                    showToast('Please select a file first.', 'error');
                     return;
                 }
 
@@ -198,11 +194,11 @@
                     });
 
                 if (uploadError) {
-                    statusEl.style.color = 'var(--danger)';
-                    statusEl.innerText = 'Upload failed: ' + uploadError.message;
+                    statusEl.innerText = '';
+                    showToast('Upload failed: ' + uploadError.message, 'error');
                 } else {
-                    statusEl.style.color = 'var(--success)';
-                    statusEl.innerText = 'Successfully updated ' + targetFileName;
+                    statusEl.innerText = '';
+                    showToast('Successfully updated ' + targetFileName, 'success');
                 }
             };
         });

@@ -7,6 +7,25 @@ if (typeof supabase !== 'undefined') {
     window.supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
 
+// Toast Notification Utility
+window.showToast = function(message, type = 'success') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerText = message;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.classList.add('fade-out');
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
     if (!window.supabaseClient) return;
 
@@ -119,13 +138,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             const { error } = await supabaseClient.from('testimonials').insert([newReview]);
 
             if (error) {
-                status.style.color = 'var(--danger)';
-                status.innerText = 'Error submitting review. Please try again.';
+                status.innerText = '';
+                showToast('Error submitting review. Please try again.', 'error');
                 btn.disabled = false;
             } else {
-                status.style.color = 'var(--success)';
-                status.innerText = 'Review submitted! It will appear once approved by the clinic.';
+                status.innerText = '';
+                showToast('Review submitted! It will appear once approved.', 'success');
                 reviewForm.reset();
+                updateStars(5);
                 btn.disabled = false;
             }
         });

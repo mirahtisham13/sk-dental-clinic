@@ -753,3 +753,35 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
     color: #f59e0b;
 }
 
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+    pointer-events: none;
+}
+.toast {
+    background: var(--bg-elevated);
+    color: var(--text);
+    padding: 16px 24px;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    transition: opacity 0.3s ease;
+}
+.toast.success { border-left-color: var(--success); }
+.toast.error { border-left-color: var(--danger); }
+.toast.fade-out { opacity: 0; }
+
+@keyframes slideInRight {
+    from { transform: translateX(120%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
